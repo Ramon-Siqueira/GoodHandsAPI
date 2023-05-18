@@ -1,9 +1,12 @@
 package com.github.ProjetoGoodHands.GoodHands.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -29,8 +32,24 @@ public class Postagem {
 	private String descricao;
 
 	@NotBlank(message = "Campo Obrigatório")
-	private Double arrecacao;
+	private Double arrecadacao;
 
+	
+	
+	public TemaPostagem getTemapostagem() {
+		return temapostagem;
+	}
+
+	public void setTemapostagem(TemaPostagem temapostagem) {
+		this.temapostagem = temapostagem;
+	}
+
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private TemaPostagem temapostagem;
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -63,12 +82,12 @@ public class Postagem {
 		this.descricao = descricao;
 	}
 
-	public double getArrecacao() {
-		return arrecacao;
+	public double getArrecadacao() {
+		return arrecadacao;
 	}
 
-	public void setArrecacao(double arrecacao) {
-		this.arrecacao = arrecacao;
+	public void setArrecadacao(double arrecadacao) {
+		this.arrecadacao = arrecadacao;
 	}
 
 }
