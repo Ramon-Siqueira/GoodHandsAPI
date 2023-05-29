@@ -1,10 +1,19 @@
 package com.github.ProjetoGoodHands.GoodHands.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -17,19 +26,30 @@ public class Usuario {
 	private Long id;
 
 	@NotBlank(message = "Campo Obrigatório!!")
-	@Size(max = 245)
 	private String nome;
 
-	@Size(max = 45)
 	@NotBlank(message = "Campo Obrigatório!!")
+	@Email(message = "O Atributo Usuário deve ser um email válido!")
 	private String usuario;
 	
-	@Size(max = 45)
 	@NotBlank(message = "Campo Obrigatório!!")
+	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
 	private String senha;
 	
-	@Size(max = 245)
+	@Size(max = 1000)
 	private String foto;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuario")
+	private List<Postagem> postagem;
+
+	public List<Postagem> getPostagem() {
+		return postagem;
+	}
+
+	public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
+	}
 
 	public Long getId() {
 		return id;
