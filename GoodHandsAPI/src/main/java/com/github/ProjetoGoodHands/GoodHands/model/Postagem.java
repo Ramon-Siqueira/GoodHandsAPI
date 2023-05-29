@@ -44,12 +44,24 @@ public class Postagem {
 		this.temapostagem = temapostagem;
 	}
 
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private TemaPostagem temapostagem;
 	
-	
-	
+	@ManyToOne
+    @JsonIgnoreProperties("postagem")
+    private Usuario usuario;
+
 	public Long getId() {
 		return id;
 	}
