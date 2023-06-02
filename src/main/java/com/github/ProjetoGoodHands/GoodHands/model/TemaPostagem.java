@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -27,7 +28,7 @@ public class TemaPostagem {
 	@Size(max = 255)
 	private String causa;
 
-	@NotBlank(message = "Campo Obrigatório")
+	@NotNull(message = "Campo Obrigatório")
 	private Double metaArrecadacao;
 
 	public List<Postagem> getPostagem() {

@@ -59,7 +59,7 @@ public class PostagemController {
 		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema não encontrado", null);
 	}
 
-	@PutMapping
+	@PutMapping 
 	public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem postagem) {
 		if (postagemRepository.existsById(postagem.getId())) {
 
