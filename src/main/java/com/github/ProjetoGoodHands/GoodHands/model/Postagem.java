@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -31,11 +32,17 @@ public class Postagem {
 	@Size(max = 1000)
 	private String descricao;
 
-	@NotBlank(message = "Campo Obrigatório")
+	@NotNull(message = "Campo Obrigatório")
 	private Double arrecadacao;
 
-	
-	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private TemaPostagem temapostagem;
+
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
+
 	public TemaPostagem getTemapostagem() {
 		return temapostagem;
 	}
@@ -44,7 +51,6 @@ public class Postagem {
 		this.temapostagem = temapostagem;
 	}
 
-	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -52,15 +58,6 @@ public class Postagem {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-
-	@ManyToOne
-	@JsonIgnoreProperties("postagem")
-	private TemaPostagem temapostagem;
-	
-	@ManyToOne
-    @JsonIgnoreProperties("postagem")
-    private Usuario usuario;
 
 	public Long getId() {
 		return id;
